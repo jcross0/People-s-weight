@@ -1,0 +1,82 @@
+#include <iostream>
+#include <iomanip>              
+#include <vector>
+#include <string>
+
+using namespace std;
+
+struct Person {
+   string firstName;
+   double weight;
+};
+
+//prompts user to enter 5 names and corresponding weights
+void getNameWeight(vector<Person>& mainVect) {
+   
+   for (int i = 0; i < 5; ++i){
+      cout << "Enter name " << i+1 << ":" << endl;
+      getline (cin,mainVect.at(i).firstName);
+      cout << "Enter weight " << i+1 << " [lbs]:";
+      cin >> mainVect.at(i).weight;
+      cout << endl;
+      }
+}
+
+// prints the contents of the vector in a single line
+void printContent(vector<Person>& printVect) {
+   cout << "You entered:" << endl;
+   
+   for (int j = 0; j < 5; j++) {
+      cout << fixed << setprecision(2);
+      cout << printVect.at(j).firstName << " " << printVect.at(j).weight << "; ";
+   }
+}  
+
+// prints total weight
+void totalWeight(vector<Person>& printVect) {
+   double total;
+   for (int k = 0; k < 5; k++){
+      total = total + printVect.at(k).weight;
+   }
+   cout << fixed << setprecision(2);
+   cout << "Total weight : " << total << " lbs";
+   
+}
+
+// prints avg weight
+void avgWeight(vector<Person>& printVect){
+   double avg;
+   double total;
+   for (int k = 0; k < 5; k++){
+      total = total + printVect.at(k).weight;
+   }
+   avg = total / 5.00;
+   cout << "Average Weight : " << avg << " lbs";
+}
+
+// prints max weight
+void maxWeight(vector<Person>& printVect) {
+   double max;
+   max = printVect.at(0).weight;
+   for (int i = 1; i < 5; i++) {
+      if (printVect.at(i).weight > max) {
+         max = printVect.at(i).weight;
+      }
+   }
+   cout << "Max weight : " << max << " lbs";
+}
+
+int main() {
+   vector<Person> mainVect(5);
+   getNameWeight(mainVect);
+   cout << endl;
+   printContent(mainVect);
+   cout << endl;
+   totalWeight(mainVect);
+   cout << endl;
+   avgWeight(mainVect);
+   cout << endl;
+   maxWeight(mainVect);
+   
+   return 0;
+}
